@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anderson Gao - Electrical Engineering Portfolio</title>
+    <link rel="icon" type="image/png" href="andersonprofilecropped.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff; /* Use white or your preferred solid color */
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98) !important;
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: none;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #357a8a;
+            text-decoration: none;
+        }
+
+        .resume-btn {
+            background: #357a8a;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 22px;
+            padding: 0.45rem 1.2rem;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(53,122,138,0.08);
+            transition: background 0.2s;
+        }
+
+        .resume-btn:hover {
+            background: #286f7a;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #357a8a;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #357a8a;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            position: relative;
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+            background: url('gt_backdrop.png') center center/cover no-repeat;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-overlay {
+            background: rgba(20, 24, 31, 0.72); /* Slightly opaque dark box */
+            border-radius: 24px;
+            padding: 48px 32px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .hero-content .description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
+        .cta-button:hover {
+            background: white;
+            color: #357a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .section {
+            padding: 80px 0;
+            background: #fff; /* Ensure all sections are white */
+            margin: 0;
+        }
+
+        .section:nth-child(even) {
+            background: #f8f9fa; /* Optional: very light gray for alternating sections */
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #4bb0c8, #357a8a);
+            border-radius: 2px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .profile-photo {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .profile-photo:hover {
+            transform: translateY(-5px);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #357a8a;
+            display: block;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: #357a8a;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #4bb0c8, #357a8a);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #4bb0c8, #357a8a);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-period {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-description {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-highlights {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .project-highlights li {
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .project-highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #357a8a;
+            font-weight: bold;
+        }
+
+        .experience-timeline {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center; /* Center the panes horizontally */
+        }
+
+        .timeline-item {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 18px;
+            margin-bottom: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+            position: static; /* Remove left/transform for natural centering */
+            transition: transform 0.3s ease;
+            text-align: left;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .timeline-header {
+            border-bottom: 2px solid #357a8a;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #357a8a;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-company {
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-period {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        @media (max-width: 1100px) {
+            .timeline-item {
+                width: 98%;
+                padding: 2rem;
+            }
+            .experience-timeline {
+                max-width: 100%;
+                padding: 0 5px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item {
+                width: 100%;
+                padding: 1.2rem;
+                max-width: 100%;
+            }
+            .experience-timeline {
+                padding: 0;
+            }
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                left: 0;
+                transform: none;
+                width: 100%;
+            }
+            
+            .timeline-item:hover,
+            .timeline-item:nth-child(even):hover {
+                transform: translateY(-5px);
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: flex;
+            }
+        }
+
+        .section.contact {
+            background: linear-gradient(135deg, #4bb0c8 0%, #357a8a 100%);
+            color: white;
+            padding: 78.125px 0 62.5px 0; /* Increased by 25% again */
+            text-align: center;
+        }
+
+        .section.contact .section-title {
+            color: white;
+            font-size: 2.74rem; /* Increased by 25% again */
+            font-weight: 800;
+            margin-bottom: 1.56rem; /* Increased by 25% again */
+        }
+
+        .section.contact .section-title::after {
+            background: linear-gradient(90deg, #4bb0c8, #357a8a);
+            height: 4.69px; /* Increased by 25% again */
+            width: 140.625px;  /* Increased by 25% again */
+            bottom: -14.06px; /* Increased by 25% again */
+        }
+
+        .section.contact p {
+            font-size: 1.25rem; /* Increased by 25% again */
+            margin-bottom: 2.34rem; /* Increased by 25% again */
+            color: white;
+            font-weight: 500;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.56rem; /* Increased by 25% again */
+            margin-top: 1.17rem; /* Increased by 25% again */
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(255,255,255,0.18);
+            color: white;
+            font-size: 1.17rem; /* Increased by 25% again */
+            font-weight: 500;
+            border-radius: 14.06px; /* Increased by 25% again */
+            padding: 0.94rem 1.95rem; /* Increased by 25% again */
+            text-decoration: none;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.28);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            color: #fff;
+        }
+
+        .contact-item span:first-child {
+            font-size: 1.56rem; /* Increased by 25% again */
+        }
+
+        @media (max-width: 900px) {
+            .contact-info {
+                flex-direction: column;
+                gap: 1.5rem;
+                align-items: center;
+            }
+            .section.contact .section-title {
+                font-size: 2.2rem;
+            }
+            .section.contact p {
+                font-size: 1.1rem;
+            }
+            .contact-item {
+                font-size: 1.1rem;
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* --- Sidebar styles for mobile navigation --- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -260px;
+            width: 260px;
+            height: 100vh;
+            background: #fff;
+            box-shadow: -2px 0 24px rgba(0,0,0,0.12);
+            z-index: 2000;
+            transition: right 0.3s cubic-bezier(.77,0,.18,1);
+            display: flex;
+            flex-direction: column;
+            padding-top: 80px;
+        }
+        .sidebar.open {
+            right: 0;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0 2rem;
+        }
+        .sidebar li {
+            margin-bottom: 2rem;
+        }
+        .sidebar-link {
+            color: #357a8a;
+            font-size: 1.3rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .sidebar-link:hover {
+            color: #222;
+        }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.18);
+            z-index: 1500;
+            transition: opacity 0.3s;
+        }
+        .sidebar-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none !important;
+            }
+            .sidebar {
+                display: flex;
+            }
+        }
+
+        /* Center the Caffeine Regulator Attachment overlay box and its text */
+        .caffcap-overlay {
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Vertically center the overlay box in the project header */
+        .caffcap-header {
+            min-height: 220px; /* slightly taller for better vertical centering */
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center !important;
+            align-items: center !important;
+            padding-bottom: 0 !important;
+        }
+        .ml-f1-header {
+            min-height: 220px;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center !important;
+            align-items: center !important;
+            padding-bottom: 0 !important;
+        }
+        .ml-f1-overlay {
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Add this to your <style> section to center the text in the first two project cards */
+        .project-card .project-header {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <span class="logo-group">
+                <a href="#home" class="logo" style="cursor: pointer;">Anderson Gao</a>
+                <a href="Anderson Gao.pdf" target="_blank" class="resume-btn">Resume</a>
+            </span>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sidebar for mobile navigation -->
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="#home" class="sidebar-link">Home</a></li>
+            <li><a href="#about" class="sidebar-link">About</a></li>
+            <li><a href="#skills" class="sidebar-link">Skills</a></li>
+            <li><a href="#projects" class="sidebar-link">Projects</a></li>
+            <li><a href="#experience" class="sidebar-link">Experience</a></li>
+            <li><a href="#contact" class="sidebar-link">Contact</a></li>
+        </ul>
+    </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <section id="home" class="hero">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>Anderson Gao</h1>
+                <div class="subtitle">Creator | Learner | Full-Time Hockey Fan</div>
+                <div class="description">
+                    I'm a Georgia Tech EE student with hands-on experience in ML, embedded systems, and research. 
+                    Currently developing novel solutions in lightning classification and wearable haptics.
+                </div>
+                <div class="description">
+                   Seeking Summer 2026 internship/co-op opportunities!
+                </div>
+                <div class="description">
+                   Thanks for coming to my website!
+                </div>
+                <a href="#contact" class="cta-button">Let's Connect</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <ul style="font-size: 1.1rem; line-height: 1.8; list-style: disc; margin-left: 1.5rem;">
+                        <li>2nd year Electrical Engineering major @ Georgia Tech w/ Junior class standing.</li>
+                        <li>Passionate about pushing the boundaries of technology through innovative engineering solutions.</li>
+                        <li>Experience in machine learning, embedded systems, and wearable electronics.</li>
+                        <li>Learning something new every day!</li>
+                        <li>Research interests are in the application of ML and designing wearable technology for people with mobility and learning differences.</li>
+                        <li>Tour guide for Georgia Tech. You may see me on campus sharing my passion for engineering to future Yellow Jackets!</li>
+                        <li>Fun fact: I have a porcelain tooth. You can ask me how I got it. 😅</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="anderson_profile.jpg" alt="Anderson Gao professional photo" class="profile-photo">
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">4.00</span>
+                    <span>GPA</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <span>Languages</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">9.69s</span>
+                    <span>Fastest Rubik's Cube Solve</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1</span>
+                    <span>Disappointed Canucks Fan</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C/C++</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">MATLAB</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">Assembly</span>
+                        <span class="skill-tag">Bash</span>
+                        <span class="skill-tag">YAML</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Technical Expertise</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Signal Processing</span>
+                        <span class="skill-tag">PCB Design</span>
+                        <span class="skill-tag">CMOS</span>
+                        <span class="skill-tag">Digital System Design</span>
+                        <span class="skill-tag">AC/DC Circuit Analysis</span>
+                        <span class="skill-tag">OOP</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Hardware</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">FPGA</span>
+                        <span class="skill-tag">Oscilloscope</span>
+                        <span class="skill-tag">Logic Analyzer</span>
+                        <span class="skill-tag">Arduino</span>
+                        <span class="skill-tag">3D Printer</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Software & Systems</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Linux Shell</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">NI Multisim</span>
+                        <span class="skill-tag">Altium</span>
+                        <span class="skill-tag">SOLIDWORKS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- 1. Lightning Classification ML Model -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">Lightning Classification ML Model</div>
+                        <div class="project-period">July 2025 – Present</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            Research-grade machine learning model for electromagnetic waveform analysis and lightning event classification.
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Developing model with 95% accuracy in classifying Intracloud vs Cloud-to-Ground lightning</li>
+                            <li>Processing complex electromagnetic waveform data</li>
+                            <li>Authoring graduate-level research paper publication</li>
+                            <li>Contributing to atmospheric science research advancement</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 2. Blackjack Card-Counting Glasses -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">Blackjack Card-Counting Glasses</div>
+                        <div class="project-period">August 2025 – Present</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            Innovative wearable technology using computer vision and Raspberry Pi for real-time card recognition and counting.
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Raspberry Pi with computer vision for real-time card detection</li>
+                            <li>Developing custom algorithms for accurate card counting</li>
+                            <li>Miniaturized hardware design for seamless wearable integration</li>
+                            <li>Real-time processing with minimal latency</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 3. ML Formula 1 Prediction Model -->
+                <div class="project-card" style="background: none; overflow: hidden;">
+                    <div class="project-header ml-f1-header" style="
+                        background: none;
+                        color: white;
+                        padding: 1.5rem;
+                        border-radius: 24px 24px 0 0;
+                        background-image: url('f1predictorscreenshot.png');
+                        background-size: cover;
+                        background-position: center top;
+                        min-height: 220px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        position: relative;
+                    ">
+                        <div class="ml-f1-overlay" style="
+                            background: rgba(20, 24, 31, 0.72);
+                            border-radius: 24px;
+                            padding: 24px 20px 16px 20px;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+                            max-width: 90%;
+                            text-align: center;
+                            margin-left: auto;
+                            margin-right: auto;
+                        ">
+                            <div class="project-title" style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem;">
+                                ML Formula 1 Prediction Model
+                            </div>
+                            <div class="project-period" style="color: #f3f3f3; font-size: 0.9rem;">June 2025 – July 2025</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            Advanced machine learning model that predicts race finishing order for every Formula 1 Grand Prix in the 2025 season.
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Achieved 80% accuracy using regression analysis with external F1 APIs</li>
+                            <li>Implemented weighted features: Track Temperature, Championship Points, Weather</li>
+                            <li>Designed intuitive UI for user customization and prediction visualization</li>
+                            <li>Real-time data integration and dynamic model updating</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 4. Caffeine Regulator Attachment (remains last as before) -->
+                <div class="project-card" style="background: none; overflow: hidden;">
+                    <div class="project-header caffcap-header" style="
+                        background: none;
+                        color: white;
+                        padding: 1.5rem;
+                        border-radius: 24px 24px 0 0;
+                        background-image: url('caffcapscreenshot.png');
+                        background-size: cover;
+                        background-position: center top -15px;
+                        min-height: 220px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        position: relative;
+                    ">
+                        <div class="caffcap-overlay" style="
+                            background: rgba(20, 24, 31, 0.72);
+                            border-radius: 24px;
+                            padding: 24px 20px 16px 20px;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+                            max-width: 90%;
+                            text-align: center;
+                            margin-left: auto;
+                            margin-right: auto;
+                        ">
+                            <div class="project-title" style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem;">
+                                <a href="https://devpost.com/software/caffcap?_gl=1*1o17so9*_gcl_au*MTE4OTUwNjgwNS4xNzU1MjgzNzM2*_ga*MTI2ODY5OTY1Ny4xNzU1MjgzNzM2*_ga_0YHJK3Y10M*czE3NTU3MDk4MzAkbzQkZzEkdDE3NTU3MDk4MzMkajU3JGwwJGgw"
+                                   target="_blank"
+                                   style="color: inherit; text-decoration: underline;">
+                                    Caffeine Regulator Attachment
+                                </a>
+                            </div>
+                            <div class="project-period" style="color: #f3f3f3; font-size: 0.9rem;">July 2023</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            Team project at M&amp;TSI 2023: Designed and 3D printed an attachment for caffeinated drinks to monitor and regulate caffeine intake.
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Modeled the attachment in SOLIDWORKS and fabricated with 3D printing</li>
+                            <li>Integrated Arduino Uno, servo motor, and flow sensor for real-time volume tracking and automated shutoff</li>
+                            <li>Developed a Replit-based app for drink selection and daily caffeine tracking</li>
+                            <li>Collaborated in a team of 4, emphasizing teamwork and rapid prototyping</li>
+                            <li>Produced and edited a final product video and pitched to a panel of VCs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 5. Fourier Transform & Noise Suppression Research (replaced with new card) -->
+                <div class="project-card" style="background: none; overflow: hidden;">
+                    <div class="project-header" style="
+                        background: none;
+                        color: white;
+                        padding: 1.5rem;
+                        border-radius: 24px 24px 0 0;
+                        background-image: url('fourierpane.png'); /* Use your provided image filename */
+                        background-size: cover;
+                        background-position: center top;
+                        min-height: 220px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        position: relative;
+                    ">
+                        <div style="
+                            background: rgba(20, 24, 31, 0.72);
+                            border-radius: 24px;
+                            padding: 24px 20px 16px 20px;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+                            max-width: 90%;
+                            text-align: center;
+                            margin-left: auto;
+                            margin-right: auto;
+                        ">
+                            <div class="project-title" style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem;">
+                                <a href="GAO, Anderson – Pioneer Physics Research Paper.pdf" target="_blank" style="color: inherit; text-decoration: underline;">
+                                    Fourier Transform & Noise Suppression Research
+                                </a>
+                            </div>
+                            <div class="project-period" style="color: #f3f3f3; font-size: 0.9rem;">June 2022 – August 2022</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            Authored a 15-page research paper, "Application of the Fourier Transform to Explain Noise Suppression in Relation to the Rubik’s Cube," investigating how digital noise suppression works in video conferencing apps like Zoom.
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Explored the use of Discrete Fourier Transform (DFT) for digital noise suppression in online video chats</li>
+                            <li>Designed and conducted experiments using MATLAB to analyze Rubik’s Cube turning sounds before and after noise suppression</li>
+                            <li>Identified the frequency threshold at which ambient sounds are suppressed by Zoom’s DNS algorithm</li>
+                            <li>Demonstrated practical applications of signal processing in real-world communication platforms</li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-timeline">
+                <!-- 1. Research Assistant -->
+                <div class="timeline-item">
+                    <div class="timeline-header" style="position: relative;">
+                        <div class="timeline-title">Research Assistant</div>
+                        <div class="timeline-company">Low Frequency Radio Lab, Georgia Tech</div>
+                        <div class="timeline-period">July 2025 – Present</div>
+                        <img src="georgiatech_lf_lab_logo.png" alt="Georgia Tech Low Frequency Lab Logo"
+                             style="position: absolute; top: 0; right: 0; width: 70px; height: 70px; object-fit: contain; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); background: #fff;">
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Developing ML classification model with &gt;95% accuracy that parses through electromagnetic waveform data from lightning strikes and classifies the events as Intracloud or Cloud-to-Ground lightning</li>
+                        <li>Executing data-processing pipeline that gathers lightning data from a network containing 100,000,000+ annual strikes</li>
+                        <li>Authoring graduate-level research paper using novel methodologies obtained from this project to advance atmospheric science research</li>
+                    </ul>
+                </div>
+
+                <!-- Mechatronics and Motivation (VIP) -->
+                <div class="timeline-item">
+                    <div class="timeline-header" style="position: relative;">
+                        <div class="timeline-title">Mechatronics and Motivation</div>
+                        <div class="timeline-company">Research and Design Team, Atlanta, GA</div>
+                        <div class="timeline-period">August 2025 – Present</div>
+                        <img src="vip_logo.png" alt="VIP Vertically Integrated Projects Logo"
+                             style="position: absolute; top: 0; right: 0; width: 80px; height: 50px; object-fit: contain; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); background: #fff;">
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Prototyping flexible PCBs for use in future medical aids</li>
+                        <li>Conducting preliminary research in neuroscience to identify common faults with medical devices and create a novel solution in wearable mechatronics</li>
+                    </ul>
+                </div>
+
+                <!-- 2. Electrical Engineering Intern -->
+                <div class="timeline-item">
+                    <div class="timeline-header" style="position: relative;">
+                        <div class="timeline-title">Electrical Engineering Intern</div>
+                        <div class="timeline-company">Texavie, Vancouver, Canada</div>
+                        <div class="timeline-period">August 2023 – September 2023</div>
+                        <img src="texavie_logo.png" alt="Texavie Logo"
+                             style="position: absolute; top: 0; right: 0; width: 90px; height: 45px; object-fit: contain; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); background: #fff;">
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Designed flexible PCBs for a smart-glove technology startup</li>
+                        <li>Created professional schematic diagrams in NI Multisim</li>
+                        <li>Presented technical designs in company all-hands meetings</li>
+                    </ul>
+                </div>
+
+                 <!-- 2. Electrical Engineering Intern -->
+                <div class="timeline-item">
+                    <div class="timeline-header" style="position: relative;">
+                        <div class="timeline-title">Particle Physics Research Intern</div>
+                        <div class="timeline-company">TRIUMF, Vancouver, Canada</div>
+                        <div class="timeline-period">August 2022 – September 2022</div>
+                        <img src="triumf_icon.png" alt="TRIUMF Logo"
+                             style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; object-fit: contain; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); background: #fff;">
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Assembled a time-of-flight mass spectrometer</li>
+                        <li>Collaborated with co-op students on various physics projects</li>
+                        <li>Enriched my learning of particle accelerators and the current state of research</li>
+                    </ul>
+                </div>
+
+                <!-- 4. Tour Guide -->
+                <div class="timeline-item">
+                    <div class="timeline-header" style="position: relative;">
+                        <div class="timeline-title">Tour Guide</div>
+                        <div class="timeline-company">Georgia Tech Undergraduate Admissions</div>
+                        <div class="timeline-period">January 2025 – Present</div>
+                        <img src="gt_admission_logo.png" alt="GT Undergraduate Admission Logo"
+                             style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; object-fit: contain; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); background: #fff;">
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Leading engaging campus tours for prospective students and families, tailoring route and narratives to audience interests while clearly explaining academics, research, housing, and student life</li>
+                        <li>Coordinating tour logistics and high-volume Q&amp;A (check-in, timing, accessibility)</li>
+                        <li>Collaborating with Admissions and fellow guides to ensure a polished, on-schedule visitor experience</li>
+                    </ul>
+                </div>
+
+                <!-- 3. Competition Organizer -->
+                <div class="timeline-item">
+                    <div class="timeline-header" style="position: relative;">
+                        <div class="timeline-title">Competition Organizer</div>
+                        <div class="timeline-company">World Cube Association</div>
+                        <div class="timeline-period">January 2023 – Present</div>
+                        <img src="wca_logo.png" alt="World Cube Association Logo"
+                             style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; object-fit: contain; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); background: #fff;">
+                    </div>
+                    <ul class="project-highlights">
+                        <li>Spearheading logistics for local Rubik’s Cube competitions with over 400+ attendees</li>
+                        <li>Generated $5,000+ so far in revenue from event registration fees</li>
+                        <li>Pioneered a novel delegation system allowing volunteer roles to be equitably allocated to participants on competition day</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Let's Connect</h2>
+            <p>I'm actively seeking summer 2026 internship/co-op opportunities. Let's discuss how I can contribute to your team!</p>
+            <div class="contact-info">
+                <a href="mailto:agao72@gatech.edu" class="contact-item">
+                    <span>📧</span>
+                    <span>agao72@gatech.edu</span>
+                </a>
+                <a href="tel:+17789578766" class="contact-item">
+                    <span>📞</span>
+                    <span>+1 (778) 957-8766</span>
+                </a>
+                <a href="https://www.linkedin.com/in/andersongao1" class="contact-item" target="_blank">
+                    <span>💼</span>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Anderson Gao. Last Updated September 2025.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections and cards
+        document.querySelectorAll('.section, .project-card, .timeline-item, .skill-category').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // --- Sidebar mobile menu functionality ---
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            sidebar.classList.add('open');
+            sidebarOverlay.classList.add('active');
+        });
+
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('active');
+        });
+
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('active');
+            });
+        });
+        // --- End sidebar mobile menu functionality ---
+    </script>
+</body>
+</html>
