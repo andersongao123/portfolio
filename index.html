@@ -70,7 +70,11 @@
         }
 
         .resume-btn:hover {
-            background: #286f7a;
+            background: #4bb0c8;
+            color: #fff;
+            box-shadow: 0 0 0 4px rgba(75,176,200,0.18), 0 2px 10px rgba(53,122,138,0.08);
+            filter: brightness(1.15);
+            transition: background 0.2s, box-shadow 0.2s, filter 0.2s;
         }
 
         .nav-links {
@@ -108,10 +112,10 @@
 
         .hero {
             position: relative;
-            padding: 120px 0 80px;
+            padding: 145px 0 80px;
             text-align: center;
             color: white;
-            background: url('gt_backdrop.png') center center/cover no-repeat;
+            background: url('gt_sketch.png') center top/cover no-repeat;
             min-height: 500px;
             display: flex;
             align-items: center;
@@ -687,13 +691,18 @@
             align-items: center;
             justify-content: center;
         }
+
+        @media (max-width: 600px) {
+          .timeline-header img {
+            display: none !important;
+          }
+        }
     </style>
 </head>
 <body>
     <header>
         <nav>
             <span class="logo-group">
-                <a href="#home" class="logo" style="cursor: pointer;">Anderson Gao</a>
                 <a href="Anderson Gao.pdf" target="_blank" class="resume-btn">Resume</a>
             </span>
             <ul class="nav-links">
@@ -729,16 +738,13 @@
         <div class="hero-overlay">
             <div class="hero-content">
                 <h1>Anderson Gao</h1>
-                <div class="subtitle">Creator | Learner | Full-Time Hockey Fan</div>
+                <div class="subtitle">Maker | Learner | Storyteller</div>
                 <div class="description">
-                    I'm a Georgia Tech EE student with hands-on experience in ML, embedded systems, and research. 
+                    Georgia Tech EE student with experience in ML, embedded systems, and research. 
                     Currently developing novel solutions in lightning classification and wearable haptics.
                 </div>
                 <div class="description">
-                   Seeking Summer 2026 internship/co-op opportunities!
-                </div>
-                <div class="description">
-                   Thanks for coming to my website!
+                   <b>Seeking Summer 2026 internship/co-op opportunities.</b>
                 </div>
                 <a href="#contact" class="cta-button">Let's Connect</a>
             </div>
@@ -753,10 +759,10 @@
                     <ul style="font-size: 1.1rem; line-height: 1.8; list-style: disc; margin-left: 1.5rem;">
                         <li>2nd year Electrical Engineering major @ Georgia Tech w/ Junior class standing.</li>
                         <li>Passionate about pushing the boundaries of technology through innovative engineering solutions.</li>
-                        <li>Experience in machine learning, embedded systems, and wearable electronics.</li>
-                        <li>Learning something new every day!</li>
                         <li>Research interests are in the application of ML and designing wearable technology for people with mobility and learning differences.</li>
+                        <li>Learning something new every day!</li>
                         <li>Tour guide for Georgia Tech. You may see me on campus sharing my passion for engineering to future Yellow Jackets!</li>
+                        <li>Self-proclaimed dorm room chef.</li>
                         <li>Fun fact: I have a porcelain tooth. You can ask me how I got it. 😅</li>
                     </ul>
                 </div>
@@ -779,7 +785,7 @@
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">1</span>
-                    <span>Disappointed Canucks Fan</span>
+                    <span>Diehard Hockey Fan</span>
                 </div>
             </div>
         </div>
@@ -1147,9 +1153,9 @@
     <section id="contact" class="section contact">
         <div class="container">
             <h2 class="section-title" style="color: white;">Let's Connect</h2>
-            <p>I'm actively seeking summer 2026 internship/co-op opportunities. Let's discuss how I can contribute to your team!</p>
+            <p>I'm actively seeking <b>Summer 2026 internship/co-op opportunities.</b> Let's discuss how I can contribute to your team!</p>
             <div class="contact-info">
-                <a href="mailto:agao72@gatech.edu" class="contact-item">
+                <a href="mailto:agao72@gatech.edu" class="contact-item" target="_blank" rel="noopener">
                     <span>📧</span>
                     <span>agao72@gatech.edu</span>
                 </a>
@@ -1167,7 +1173,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Anderson Gao. Last Updated September 2025.</p>
+            <p>&copy; 2025 Anderson Gao.</p>
         </div>
     </footer>
 
