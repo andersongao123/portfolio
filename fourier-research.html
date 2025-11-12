@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fourier Transform & Noise Suppression Research - Anderson Gao</title>
+    <link rel="icon" type="image/png" href="andersonprofilecropped.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .back-btn {
+            background: #357a8a;
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 22px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #4bb0c8;
+            transform: translateY(-2px);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #357a8a;
+            text-decoration: none;
+        }
+
+        .project-hero {
+            background: linear-gradient(135deg, #4bb0c8, #357a8a);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .project-period {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .project-content {
+            padding: 80px 0;
+        }
+
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #357a8a;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #357a8a;
+            padding-bottom: 0.5rem;
+        }
+
+        .project-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin: 2rem auto;
+            display: block;
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #357a8a;
+        }
+
+        .highlight-card h4 {
+            color: #357a8a;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 2rem 0;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, #4bb0c8, #357a8a);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            background: #357a8a;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: #4bb0c8;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 2.2rem;
+            }
+            
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="back-btn">← Back to Portfolio</a>
+            <a href="index.html" class="logo">Anderson Gao</a>
+        </nav>
+    </header>
+
+    <section class="project-hero">
+        <div class="container">
+            <h1 class="project-title">Fourier Transform & Noise Suppression Research</h1>
+            <div class="project-subtitle">15-page research paper on digital noise suppression in video conferencing</div>
+            <div class="project-period">June 2022 – August 2022</div>
+        </div>
+    </section>
+
+    <section class="project-content">
+        <div class="container">
+            <!-- Project Overview -->
+            <div class="content-section">
+                <h2 class="section-title">Project Overview</h2>
+                <img src="fourierpane.png" alt="Fourier Transform Analysis" class="project-image">
+                <p class="description-text">
+                    This comprehensive research project explores the practical application of Discrete Fourier Transform (DFT) in digital noise suppression algorithms used by modern video conferencing platforms. Conducted under the mentorship of Arthur Western, Professor Emeritus of Physics and Optical Engineering at Rose-Hulman Institute of Technology, this research investigates how applications like Zoom identify and suppress ambient noise while preserving speech clarity through the unique lens of analyzing Rubik's Cube turning sounds. The 15-page paper, titled "Application of the Fourier Transform to Explain Noise Suppression in Relation to the Rubik's Cube," combines theoretical signal processing concepts with experimental analysis to understand real-world noise suppression technologies.
+                </p>
+            </div>
+
+            <!-- Key Features/Highlights -->
+            <div class="content-section">
+                <h2 class="section-title">Key Research Achievements</h2>
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <h4>DFT Implementation & Analysis</h4>
+                        <p>Explored the use of Discrete Fourier Transform for digital noise suppression in online video conferencing applications</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Experimental Design</h4>
+                        <p>Designed and conducted controlled experiments using MATLAB to analyze audio signals before and after noise suppression</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Frequency Threshold Discovery</h4>
+                        <p>Identified the specific frequency threshold at which Zoom's DNS algorithm suppresses ambient sounds like Rubik's Cube turns</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Real-World Applications</h4>
+                        <p>Demonstrated practical applications of signal processing theory in everyday communication platforms and technologies</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Details -->
+            <div class="content-section">
+                <h2 class="section-title">Technical Stack & Methodology</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">MATLAB</span>
+                    <span class="tech-tag">Discrete Fourier Transform</span>
+                    <span class="tech-tag">Signal Processing</span>
+                    <span class="tech-tag">Audio Analysis</span>
+                    <span class="tech-tag">Frequency Domain Analysis</span>
+                    <span class="tech-tag">Research Methodology</span>
+                    <span class="tech-tag">Data Visualization</span>
+                </div>
+                <p class="description-text">
+                    The research employed MATLAB as the primary tool for signal processing and analysis. The methodology involved recording Rubik's Cube turning sounds under controlled conditions, then analyzing these audio signals using DFT to understand their frequency characteristics. The study compared the original audio signals with their processed versions after passing through Zoom's noise suppression algorithm, identifying the specific frequency ranges and thresholds where suppression occurs. Mathematical analysis was combined with practical experimentation to validate theoretical predictions about noise suppression behavior.
+                </p>
+            </div>
+
+            <!-- Challenges & Solutions -->
+            <div class="content-section">
+                <h2 class="section-title">Research Challenges & Methodology</h2>
+                <p class="description-text">
+                    One of the primary challenges was designing experiments that could accurately capture and analyze the subtle differences in audio processing by proprietary algorithms. I addressed this by developing a systematic approach using controlled audio recording environments and consistent experimental conditions. Another challenge was interpreting the complex frequency domain data and correlating it with real-world noise suppression behavior. This required deep understanding of both theoretical signal processing concepts and practical audio engineering principles, bridging the gap between academic theory and industrial application.
+                </p>
+            </div>
+
+            <!-- Results & Impact -->
+            <div class="content-section">
+                <h2 class="section-title">Research Findings & Impact</h2>
+                <p class="description-text">
+                    The research successfully identified the frequency threshold at which Zoom's digital noise suppression algorithm operates, providing insights into how modern communication platforms balance noise reduction with speech preservation. The findings demonstrate the practical application of Fourier Transform theory in everyday technology, showing how mathematical concepts learned in academic settings translate to real-world engineering solutions. This research contributes to the understanding of digital signal processing in communication systems and provides a foundation for further investigation into audio processing algorithms. The work showcases the intersection of theoretical mathematics, experimental methodology, and practical engineering applications.
+                </p>
+            </div>
+
+            <!-- Research Paper -->
+            <div class="content-section">
+                <h2 class="section-title">Research Paper</h2>
+                <div class="pdf-container">
+                    <iframe src="GAO, Anderson – Pioneer Physics Research Paper.pdf" width="100%" height="800px" style="border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);">
+                        <p>Your browser does not support PDFs. <a href="GAO, Anderson – Pioneer Physics Research Paper.pdf" target="_blank">Download the PDF</a> to view the research paper.</p>
+                    </iframe>
+                </div>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <p style="margin-bottom: 1rem; color: #666;">If the PDF doesn't display above, you can download it directly:</p>
+                    <a href="GAO, Anderson – Pioneer Physics Research Paper.pdf" target="_blank" class="project-link">Download Research Paper</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Anderson Gao. <a href="index.html" style="color: #4bb0c8;">Back to Portfolio</a></p>
+        </div>
+    </footer>
+</body>
+</html>

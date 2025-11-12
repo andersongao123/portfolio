@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caffeine Regulator Attachment - Anderson Gao</title>
+    <link rel="icon" type="image/png" href="andersonprofilecropped.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .back-btn {
+            background: #357a8a;
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 22px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #4bb0c8;
+            transform: translateY(-2px);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #357a8a;
+            text-decoration: none;
+        }
+
+        .project-hero {
+            background: linear-gradient(135deg, #4bb0c8, #357a8a);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .project-period {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .project-content {
+            padding: 80px 0;
+        }
+
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #357a8a;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #357a8a;
+            padding-bottom: 0.5rem;
+        }
+
+        .project-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin: 2rem auto;
+            display: block;
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #357a8a;
+        }
+
+        .highlight-card h4 {
+            color: #357a8a;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 2rem 0;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, #4bb0c8, #357a8a);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            background: #357a8a;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: #4bb0c8;
+            transform: translateY(-2px);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin: 2rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 2.2rem;
+            }
+            
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="back-btn">← Back to Portfolio</a>
+            <a href="index.html" class="logo">Anderson Gao</a>
+        </nav>
+    </header>
+
+    <section class="project-hero">
+        <div class="container">
+            <h1 class="project-title">Caffeine Regulator Attachment</h1>
+            <div class="project-subtitle">IoT device for monitoring and regulating caffeine intake</div>
+            <div class="project-period">July 2023</div>
+        </div>
+    </section>
+
+    <section class="project-content">
+        <div class="container">
+            <!-- Project Overview -->
+            <div class="content-section">
+                <h2 class="section-title">Project Overview</h2>
+                <img src="caffcapscreenshot.png" alt="Caffeine Regulator Attachment" class="project-image">
+                <p class="description-text">
+                    Developed during the M&TSI 2023 program, this innovative team project created a smart attachment for caffeinated drinks that monitors and regulates caffeine intake. The device combines 3D-printed hardware with Arduino-based electronics and a custom web application to provide real-time volume tracking and automated shutoff functionality. This project demonstrates the practical application of IoT technology in health monitoring and showcases skills in mechanical design, embedded programming, and app development.
+                </p>
+            </div>
+
+            <!-- Key Features/Highlights -->
+            <div class="content-section">
+                <h2 class="section-title">Key Features & Achievements</h2>
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <h4>3D Design & Fabrication</h4>
+                        <p>Modeled the attachment in SOLIDWORKS and successfully fabricated using 3D printing technology</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Smart Hardware Integration</h4>
+                        <p>Integrated Arduino Uno, servo motor, and flow sensor for real-time volume tracking and automated shutoff</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Web Application Development</h4>
+                        <p>Developed a Replit-based app for drink selection and comprehensive daily caffeine tracking</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Team Collaboration & Presentation</h4>
+                        <p>Collaborated in a team of 4, produced final product video, and pitched to a panel of venture capitalists</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Details -->
+            <div class="content-section">
+                <h2 class="section-title">Technical Stack</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">SOLIDWORKS</span>
+                    <span class="tech-tag">3D Printing</span>
+                    <span class="tech-tag">Arduino Uno</span>
+                    <span class="tech-tag">C++ (Arduino IDE)</span>
+                    <span class="tech-tag">Servo Motors</span>
+                    <span class="tech-tag">Flow Sensors</span>
+                    <span class="tech-tag">Replit</span>
+                    <span class="tech-tag">Web Development</span>
+                    <span class="tech-tag">Adobe Premiere Pro</span>
+                </div>
+                <p class="description-text">
+                    The project utilized SOLIDWORKS for 3D modeling and design, followed by 3D printing for physical fabrication. The electronic system was built around an Arduino Uno microcontroller, interfacing with a flow sensor for liquid volume measurement and a servo motor for automated valve control. The software component included Arduino programming for hardware control and a web-based application developed on Replit for user interaction and data tracking. Additionally, I filmed and edited the final project demonstration video using Adobe Premiere Pro to showcase our prototype's functionality and present our work to venture capitalists. The system integrates hardware and software to provide a complete IoT solution for health monitoring.
+                </p>
+            </div>
+
+            <!-- Challenges & Solutions -->
+            <div class="content-section">
+                <h2 class="section-title">Challenges & Solutions</h2>
+                <p class="description-text">
+                    The main challenge was integrating mechanical, electrical, and software components into a cohesive system within the time constraints of the summer program. We addressed this by dividing responsibilities among team members while maintaining regular communication and integration testing. Another challenge was ensuring accurate flow measurement and reliable servo control for different liquid viscosities. We solved this through iterative testing and calibration, adjusting both hardware positioning and software algorithms to achieve consistent performance across various drink types.
+                </p>
+            </div>
+
+            <!-- Results & Impact -->
+            <div class="content-section">
+                <h2 class="section-title">Results & Impact</h2>
+                <p class="description-text">
+                    The project successfully demonstrated a functional prototype that could accurately track liquid consumption and automatically regulate intake based on preset limits. The team's presentation to venture capitalists showcased not only technical achievement but also business potential and market understanding. This project highlighted the practical applications of IoT in health monitoring and demonstrated skills in rapid prototyping, cross-functional collaboration, and product development. The experience provided valuable insights into the full product development cycle, from concept to presentation.
+                </p>
+            </div>
+
+            <!-- Project Video -->
+            <div class="content-section">
+                <h2 class="section-title">Project Video</h2>
+                <div class="video-container">
+                    <iframe width="960" height="540" src="https://www.youtube.com/embed/lipxvGe9oKU" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <p style="margin-bottom: 1rem; color: #666;">If the video doesn't load above, you can watch it directly on YouTube:</p>
+                    <a href="https://www.youtube.com/watch?v=lipxvGe9oKU" target="_blank" class="project-link">Watch on YouTube</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Anderson Gao. <a href="index.html" style="color: #4bb0c8;">Back to Portfolio</a></p>
+        </div>
+    </footer>
+</body>
+</html>

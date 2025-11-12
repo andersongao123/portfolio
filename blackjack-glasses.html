@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Card-Counting Glasses - Anderson Gao</title>
+    <link rel="icon" type="image/png" href="andersonprofilecropped.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .back-btn {
+            background: #357a8a;
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 22px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #4bb0c8;
+            transform: translateY(-2px);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #357a8a;
+            text-decoration: none;
+        }
+
+        .project-hero {
+            background: linear-gradient(135deg, #4bb0c8, #357a8a);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .project-period {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .project-content {
+            padding: 80px 0;
+        }
+
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #357a8a;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #357a8a;
+            padding-bottom: 0.5rem;
+        }
+
+        .project-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin: 2rem auto;
+            display: block;
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #357a8a;
+        }
+
+        .highlight-card h4 {
+            color: #357a8a;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 2rem 0;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, #4bb0c8, #357a8a);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            background: #357a8a;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: #4bb0c8;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 2.2rem;
+            }
+            
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="back-btn">← Back to Portfolio</a>
+            <a href="index.html" class="logo">Anderson Gao</a>
+        </nav>
+    </header>
+
+    <section class="project-hero">
+        <div class="container">
+            <h1 class="project-title">Blackjack Card-Counting Glasses</h1>
+            <div class="project-subtitle">Innovative wearable technology using computer vision for real-time card recognition</div>
+            <div class="project-period">August 2025 – Present</div>
+        </div>
+    </section>
+
+    <section class="project-content">
+        <div class="container">
+            <!-- Project Overview -->
+            <div class="content-section">
+                <h2 class="section-title">Project Overview</h2>
+                <p class="description-text">
+                    This innovative wearable technology project combines computer vision and Raspberry Pi for real-time card recognition and card counting. The system uses OpenCV to identify cards and suits in various lighting conditions, while implementing real-time card-detection algorithms that parse through electromagnetic waveform data. The project involves debugging errors using lab tools (oscilloscope, logic analyzer, DMM) to conduct system-level testing of components, and designing low-power hardware integration between Raspberry Pi, camera module, and display output to optimize performance for wearable use.
+                </p>
+            </div>
+
+            <!-- Key Features/Highlights -->
+            <div class="content-section">
+                <h2 class="section-title">Key Features & Achievements</h2>
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <h4>Real-Time Card Detection</h4>
+                        <p>Implement real-time card-detection algorithm using OpenCV to identify cards and suits in various lighting conditions</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>System-Level Testing</h4>
+                        <p>Debug errors using lab tools (oscilloscope, logic analyzer, DMM) to conduct system-level testing of components</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Low-Power Hardware Design</h4>
+                        <p>Design low-power hardware integration between Raspberry Pi, camera module, and display output to optimize performance for wearable use</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Computer Vision Processing</h4>
+                        <p>Advanced algorithms for card counting with real-time processing capabilities in varying environmental conditions</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Details -->
+            <div class="content-section">
+                <h2 class="section-title">Technical Stack</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">Raspberry Pi</span>
+                    <span class="tech-tag">Computer Vision</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">OpenCV</span>
+                    <span class="tech-tag">Embedded Systems</span>
+                    <span class="tech-tag">Hardware Design</span>
+                    <span class="tech-tag">Wearable Technology</span>
+                </div>
+                <p class="description-text">
+                    The system utilizes a Raspberry Pi as the central processing unit, running custom Python algorithms with OpenCV for computer vision tasks. The hardware design focuses on miniaturization and power efficiency to create a practical wearable device. The computer vision pipeline includes card detection, suit and rank recognition, and real-time counting algorithm implementation. Special attention is given to optimization for real-time performance in varying lighting conditions.
+                </p>
+            </div>
+
+            <!-- Challenges & Solutions -->
+            <div class="content-section">
+                <h2 class="section-title">Challenges & Solutions</h2>
+                <p class="description-text">
+                    The primary challenge lies in achieving accurate card recognition under varying lighting conditions and angles while maintaining real-time processing speeds. I addressed this by developing robust computer vision algorithms that can adapt to different environmental conditions and implementing efficient processing pipelines. Another significant challenge is miniaturizing the hardware components to fit within a wearable glasses frame while ensuring adequate processing power and battery life. This required careful component selection and custom PCB design for optimal space utilization.
+                </p>
+            </div>
+
+            <!-- Results & Impact -->
+            <div class="content-section">
+                <h2 class="section-title">Results & Impact</h2>
+                <p class="description-text">
+                    This project demonstrates the practical application of computer vision and embedded systems in creating innovative wearable technology. The system showcases advanced engineering skills in both software and hardware development, from algorithm design to physical product realization. While designed for entertainment purposes, the underlying technologies have broader applications in augmented reality, assisted vision systems, and real-time object recognition platforms. The project highlights the potential of miniaturized computing systems and their integration into everyday wearable devices.
+                </p>
+            </div>
+
+            <!-- Project Links -->
+            <div class="content-section">
+                <h2 class="section-title">Project Links</h2>
+                <div class="project-links">
+                    <a href="#" class="project-link">GitHub Repository (In Development)</a>
+                    <a href="#" class="project-link">Technical Documentation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Anderson Gao. <a href="index.html" style="color: #4bb0c8;">Back to Portfolio</a></p>
+        </div>
+    </footer>
+</body>
+</html>
