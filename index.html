@@ -306,6 +306,11 @@
             gap: 2rem;
         }
 
+        .project-card-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
         .project-card {
             background: white;
             border-radius: 20px;
@@ -313,6 +318,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             position: relative;
+            height: 300px;
         }
 
         .project-card:hover {
@@ -320,55 +326,47 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .project-header {
-            background: linear-gradient(135deg, #4bb0c8, #357a8a);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        .project-image-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
-        .project-title {
+        .project-preview-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-preview-image {
+            transform: scale(1.05);
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            text-align: center;
+        }
+
+        .project-overlay .project-title {
             font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 0.5rem;
         }
 
-        .project-period {
-            opacity: 0.9;
+        .project-overlay .project-period {
             font-size: 0.9rem;
+            opacity: 0.9;
         }
 
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-description {
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .project-highlights {
-            list-style: none;
-            margin-bottom: 1rem;
-        }
-
-        .project-highlights li {
-            margin-bottom: 0.5rem;
-            padding-left: 1rem;
-            position: relative;
-        }
-
-        .project-highlights li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #357a8a;
-            font-weight: bold;
-        }
+        /* Project header styles - removed as no longer needed with new image-based cards */
 
         .experience-timeline {
             max-width: 1000px;
@@ -744,7 +742,7 @@
                     Currently developing novel solutions in lightning classification and wearable haptics.
                 </div>
                 <div class="description">
-                   <b>Seeking Summer 2026 internship/co-op opportunities.</b>
+                   <b>Seeking Summer & Fall 2026 internship/co-op opportunities.</b>
                 </div>
                 <a href="#contact" class="cta-button">Let's Connect</a>
             </div>
@@ -757,9 +755,9 @@
             <div class="about-grid">
                 <div class="about-text">
                     <ul style="font-size: 1.1rem; line-height: 1.8; list-style: disc; margin-left: 1.5rem;">
-                        <li>2nd year Electrical Engineering major @ Georgia Tech w/ Junior class standing.</li>
+                        <li>2nd year Electrical Engineering major @ Georgia Tech w/ Minor in Physics.</li>
                         <li>Passionate about pushing the boundaries of technology through innovative engineering solutions.</li>
-                        <li>Research interests are in the application of ML and designing wearable technology for people with mobility and learning differences.</li>
+                        <li>Research interests are in the application of ML, electromagnetics, and semiconductor devices.</li>
                         <li>Learning something new every day!</li>
                         <li>Tour guide for Georgia Tech. You may see me on campus sharing my passion for engineering to future Yellow Jackets!</li>
                         <li>Self-proclaimed dorm room chef.</li>
@@ -802,11 +800,7 @@
                         <span class="skill-tag">C/C++</span>
                         <span class="skill-tag">Java</span>
                         <span class="skill-tag">MATLAB</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">HTML/CSS</span>
                         <span class="skill-tag">Assembly</span>
-                        <span class="skill-tag">Bash</span>
-                        <span class="skill-tag">YAML</span>
                     </div>
                 </div>
                 <div class="skill-category">
@@ -824,21 +818,24 @@
                 <div class="skill-category">
                     <h3>Tools & Hardware</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">FPGA</span>
                         <span class="skill-tag">Oscilloscope</span>
                         <span class="skill-tag">Logic Analyzer</span>
+                        <span class="skill-tag">Raspberry Pi</span>
                         <span class="skill-tag">Arduino</span>
+                        <span class="skill-tag">DMM</span>
+                        <span class="skill-tag">Soldering</span>
                         <span class="skill-tag">3D Printer</span>
                     </div>
                 </div>
                 <div class="skill-category">
                     <h3>Software & Systems</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">Linux Shell</span>
+                        <span class="skill-tag">Linux Shell (Bash)</span>
                         <span class="skill-tag">Git</span>
                         <span class="skill-tag">VS Code</span>
                         <span class="skill-tag">NI Multisim</span>
                         <span class="skill-tag">Altium</span>
+                        <span class="skill-tag">KiCAD</span>
                         <span class="skill-tag">SOLIDWORKS</span>
                     </div>
                 </div>
@@ -851,199 +848,69 @@
             <h2 class="section-title">Featured Projects</h2>
             <div class="projects-grid">
                 <!-- 1. Lightning Classification ML Model -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-title">Lightning Classification ML Model</div>
-                        <div class="project-period">July 2025 – Present</div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Research-grade machine learning model for electromagnetic waveform analysis and lightning event classification.
+                <a href="lightning-classification.html" class="project-card-link">
+                    <div class="project-card">
+                        <div class="project-image-container">
+                            <img src="georgiatech_lf_lab_logo.png" alt="Lightning Classification" class="project-preview-image">
+                            <div class="project-overlay">
+                                <div class="project-title">Lightning Classification ML Model</div>
+                                <div class="project-period">July 2025 – Present</div>
+                            </div>
                         </div>
-                        <ul class="project-highlights">
-                            <li>Developing model with 95% accuracy in classifying Intracloud vs Cloud-to-Ground lightning</li>
-                            <li>Processing complex electromagnetic waveform data</li>
-                            <li>Authoring graduate-level research paper publication</li>
-                            <li>Contributing to atmospheric science research advancement</li>
-                        </ul>
                     </div>
-                </div>
+                </a>
 
                 <!-- 2. Blackjack Card-Counting Glasses -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-title">Blackjack Card-Counting Glasses</div>
-                        <div class="project-period">August 2025 – Present</div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Innovative wearable technology using computer vision and Raspberry Pi for real-time card recognition and counting.
+                <a href="blackjack-glasses.html" class="project-card-link">
+                    <div class="project-card">
+                        <div class="project-image-container">
+                            <img src="anderson_profile.jpg" alt="Blackjack Glasses" class="project-preview-image">
+                            <div class="project-overlay">
+                                <div class="project-title">Blackjack Card-Counting Glasses</div>
+                                <div class="project-period">August 2025 – Present</div>
+                            </div>
                         </div>
-                        <ul class="project-highlights">
-                            <li>Raspberry Pi with computer vision for real-time card detection</li>
-                            <li>Developing custom algorithms for accurate card counting</li>
-                            <li>Miniaturized hardware design for seamless wearable integration</li>
-                            <li>Real-time processing with minimal latency</li>
-                        </ul>
                     </div>
-                </div>
+                </a>
 
                 <!-- 3. ML Formula 1 Prediction Model -->
-                <div class="project-card" style="background: none; overflow: hidden;">
-                    <div class="project-header ml-f1-header" style="
-                        background: none;
-                        color: white;
-                        padding: 1.5rem;
-                        border-radius: 24px 24px 0 0;
-                        background-image: url('f1predictorscreenshot.png');
-                        background-size: cover;
-                        background-position: center top;
-                        min-height: 220px;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        position: relative;
-                    ">
-                        <div class="ml-f1-overlay" style="
-                            background: rgba(20, 24, 31, 0.72);
-                            border-radius: 24px;
-                            padding: 24px 20px 16px 20px;
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;
-                            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-                            max-width: 90%;
-                            text-align: center;
-                            margin-left: auto;
-                            margin-right: auto;
-                        ">
-                            <div class="project-title" style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem;">
-                                ML Formula 1 Prediction Model
+                <a href="f1-prediction.html" class="project-card-link">
+                    <div class="project-card">
+                        <div class="project-image-container">
+                            <img src="f1predictorscreenshot.png" alt="F1 Prediction Model" class="project-preview-image">
+                            <div class="project-overlay">
+                                <div class="project-title">ML Formula 1 Prediction Model</div>
+                                <div class="project-period">June 2025 – July 2025</div>
                             </div>
-                            <div class="project-period" style="color: #f3f3f3; font-size: 0.9rem;">June 2025 – July 2025</div>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Advanced machine learning model that predicts race finishing order for every Formula 1 Grand Prix in the 2025 season.
-                        </div>
-                        <ul class="project-highlights">
-                            <li>Achieved 80% accuracy using regression analysis with external F1 APIs</li>
-                            <li>Implemented weighted features: Track Temperature, Championship Points, Weather</li>
-                            <li>Designed intuitive UI for user customization and prediction visualization</li>
-                            <li>Real-time data integration and dynamic model updating</li>
-                        </ul>
-                    </div>
-                </div>
+                </a>
 
-                <!-- 4. Caffeine Regulator Attachment (remains last as before) -->
-                <div class="project-card" style="background: none; overflow: hidden;">
-                    <div class="project-header caffcap-header" style="
-                        background: none;
-                        color: white;
-                        padding: 1.5rem;
-                        border-radius: 24px 24px 0 0;
-                        background-image: url('caffcapscreenshot.png');
-                        background-size: cover;
-                        background-position: center top -15px;
-                        min-height: 220px;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        position: relative;
-                    ">
-                        <div class="caffcap-overlay" style="
-                            background: rgba(20, 24, 31, 0.72);
-                            border-radius: 24px;
-                            padding: 24px 20px 16px 20px;
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;
-                            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-                            max-width: 90%;
-                            text-align: center;
-                            margin-left: auto;
-                            margin-right: auto;
-                        ">
-                            <div class="project-title" style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem;">
-                                <a href="https://devpost.com/software/caffcap?_gl=1*1o17so9*_gcl_au*MTE4OTUwNjgwNS4xNzU1MjgzNzM2*_ga*MTI2ODY5OTY1Ny4xNzU1MjgzNzM2*_ga_0YHJK3Y10M*czE3NTU3MDk4MzAkbzQkZzEkdDE3NTU3MDk4MzMkajU3JGwwJGgw"
-                                   target="_blank"
-                                   style="color: inherit; text-decoration: underline;">
-                                    Caffeine Regulator Attachment
-                                </a>
+                <!-- 4. Caffeine Regulator Attachment -->
+                <a href="caffeine-regulator.html" class="project-card-link">
+                    <div class="project-card">
+                        <div class="project-image-container">
+                            <img src="caffcapscreenshot.png" alt="Caffeine Regulator" class="project-preview-image">
+                            <div class="project-overlay">
+                                <div class="project-title">Caffeine Regulator Attachment</div>
+                                <div class="project-period">July 2023</div>
                             </div>
-                            <div class="project-period" style="color: #f3f3f3; font-size: 0.9rem;">July 2023</div>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Team project at M&amp;TSI 2023: Designed and 3D printed an attachment for caffeinated drinks to monitor and regulate caffeine intake.
-                        </div>
-                        <ul class="project-highlights">
-                            <li>Modeled the attachment in SOLIDWORKS and fabricated with 3D printing</li>
-                            <li>Integrated Arduino Uno, servo motor, and flow sensor for real-time volume tracking and automated shutoff</li>
-                            <li>Developed a Replit-based app for drink selection and daily caffeine tracking</li>
-                            <li>Collaborated in a team of 4, emphasizing teamwork and rapid prototyping</li>
-                            <li>Produced and edited a final product video and pitched to a panel of VCs</li>
-                        </ul>
-                    </div>
-                </div>
+                </a>
 
-                <!-- 5. Fourier Transform & Noise Suppression Research (replaced with new card) -->
-                <div class="project-card" style="background: none; overflow: hidden;">
-                    <div class="project-header" style="
-                        background: none;
-                        color: white;
-                        padding: 1.5rem;
-                        border-radius: 24px 24px 0 0;
-                        background-image: url('fourierpane.png'); /* Use your provided image filename */
-                        background-size: cover;
-                        background-position: center top;
-                        min-height: 220px;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        position: relative;
-                    ">
-                        <div style="
-                            background: rgba(20, 24, 31, 0.72);
-                            border-radius: 24px;
-                            padding: 24px 20px 16px 20px;
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;
-                            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-                            max-width: 90%;
-                            text-align: center;
-                            margin-left: auto;
-                            margin-right: auto;
-                        ">
-                            <div class="project-title" style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem;">
-                                <a href="GAO, Anderson – Pioneer Physics Research Paper.pdf" target="_blank" style="color: inherit; text-decoration: underline;">
-                                    Fourier Transform & Noise Suppression Research
-                                </a>
+                <!-- 5. Fourier Transform & Noise Suppression Research -->
+                <a href="fourier-research.html" class="project-card-link">
+                    <div class="project-card">
+                        <div class="project-image-container">
+                            <img src="fourierpane.png" alt="Fourier Research" class="project-preview-image">
+                            <div class="project-overlay">
+                                <div class="project-title">Fourier Transform & Noise Suppression Research</div>
+                                <div class="project-period">June 2022 – August 2022</div>
                             </div>
-                            <div class="project-period" style="color: #f3f3f3; font-size: 0.9rem;">June 2022 – August 2022</div>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Authored a 15-page research paper, "Application of the Fourier Transform to Explain Noise Suppression in Relation to the Rubik’s Cube," investigating how digital noise suppression works in video conferencing apps like Zoom.
-                        </div>
-                        <ul class="project-highlights">
-                            <li>Explored the use of Discrete Fourier Transform (DFT) for digital noise suppression in online video chats</li>
-                            <li>Designed and conducted experiments using MATLAB to analyze Rubik’s Cube turning sounds before and after noise suppression</li>
-                            <li>Identified the frequency threshold at which ambient sounds are suppressed by Zoom’s DNS algorithm</li>
-                            <li>Demonstrated practical applications of signal processing in real-world communication platforms</li>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -1055,31 +922,35 @@
                 <!-- 1. Research Assistant -->
                 <div class="timeline-item">
                     <div class="timeline-header" style="position: relative;">
-                        <div class="timeline-title">Research Assistant</div>
+                        <div class="timeline-title">Researcher</div>
                         <div class="timeline-company">Low Frequency Radio Lab, Georgia Tech</div>
                         <div class="timeline-period">July 2025 – Present</div>
                         <img src="georgiatech_lf_lab_logo.png" alt="Georgia Tech Low Frequency Lab Logo"
-                             style="position: absolute; top: 0; right: 0; width: 70px; height: 70px; object-fit: contain; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); background: #fff;">
+                             style="position: absolute; top: 0; right: 0; width: 90px; height: 90px; object-fit: contain; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); background: #fff;">
                     </div>
                     <ul class="project-highlights">
-                        <li>Developing ML classification model with &gt;95% accuracy that parses through electromagnetic waveform data from lightning strikes and classifies the events as Intracloud or Cloud-to-Ground lightning</li>
-                        <li>Executing data-processing pipeline that gathers lightning data from a network containing 100,000,000+ annual strikes</li>
-                        <li>Authoring graduate-level research paper using novel methodologies obtained from this project to advance atmospheric science research</li>
+                        <li>Develop Convolutional Neural Network with 95% accuracy that parses through electromagnetic waveform data from lightning strikes and classifies the events as Intracloud or Cloud-to-Ground lightning</li>
+                        <li>Execute data-processing pipeline that gathers lightning data from a network containing 100,000,000+ annual strikes</li>
+                        <li>Improve existing classification methods by 5% through custom-built ML model on in-house receiver data</li>
+                        <li>Author graduate-level research paper using novel methodologies obtained from this project</li>
+                        <li>Advance atmospheric science research by increasing understanding of global lightning patterns and improving safety</li>
                     </ul>
                 </div>
 
                 <!-- Mechatronics and Motivation (VIP) -->
                 <div class="timeline-item">
                     <div class="timeline-header" style="position: relative;">
-                        <div class="timeline-title">Mechatronics and Motivation</div>
-                        <div class="timeline-company">Research and Design Team, Atlanta, GA</div>
+                        <div class="timeline-title">Haptic Hardware Engineer</div>
+                        <div class="timeline-company">Mechatronics and Motivation, Atlanta, GA</div>
                         <div class="timeline-period">August 2025 – Present</div>
                         <img src="vip_logo.png" alt="VIP Vertically Integrated Projects Logo"
                              style="position: absolute; top: 0; right: 0; width: 80px; height: 50px; object-fit: contain; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); background: #fff;">
                     </div>
                     <ul class="project-highlights">
-                        <li>Prototyping flexible PCBs for use in future medical aids</li>
-                        <li>Conducting preliminary research in neuroscience to identify common faults with medical devices and create a novel solution in wearable mechatronics</li>
+                        <li>Design wearable haptics that achieve 30% increase in performance for students with autism in math education</li>
+                        <li>Implement firmware onto devkit board that activates an actuator to induce vibrating sensation via Bluetooth protocol</li>
+                        <li>Prototype two-layer flexible PCB in Altium that integrates devkit board functions to optimize device ergonomics</li>
+                        <li>Create outer casing in SOLIDWORKS to effectively hold all electronic components</li>
                     </ul>
                 </div>
 
@@ -1093,9 +964,9 @@
                              style="position: absolute; top: 0; right: 0; width: 90px; height: 45px; object-fit: contain; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); background: #fff;">
                     </div>
                     <ul class="project-highlights">
-                        <li>Designed flexible PCBs for a smart-glove technology startup</li>
-                        <li>Created professional schematic diagrams in NI Multisim</li>
-                        <li>Presented technical designs in company all-hands meetings</li>
+                        <li>Designed single-layer flexible PCB for a smart-glove prototype with real-time feedback to performance dashboard</li>
+                        <li>Created detailed schematic capture in KiCAD to present in department meetings</li>
+                        <li>Collaborated with engineers to evaluate current customer demand for wearables and the associated common faults</li>
                     </ul>
                 </div>
 
@@ -1141,10 +1012,26 @@
                              style="position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; object-fit: contain; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); background: #fff;">
                     </div>
                     <ul class="project-highlights">
-                        <li>Spearheading logistics for local Rubik’s Cube competitions with over 400+ attendees</li>
-                        <li>Generated $5,000+ so far in revenue from event registration fees</li>
-                        <li>Pioneered a novel delegation system allowing volunteer roles to be equitably allocated to participants on competition day</li>
+                        <li>Lead a cross-functional team of delegates to organize local Rubik's Cube competitions with over 400+ attendees</li>
+                        <li>Generated $5,000+ so far in revenue from event registration fees through online marketing</li>
+                        <li>Pioneered a novel delegation system allowing volunteer roles to be equitably allocated to participants on competition day resulting in 15% increase in volunteer engagement</li>
                     </ul>
+                </div>
+
+                <!-- Resume Embed -->
+                <div class="timeline-item" style="max-width: 1000px; width: 100%;">
+                    <div class="timeline-header">
+                        <div class="timeline-title">Resume</div>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <iframe src="Anderson_Gao.pdf#toolbar=0&navpanes=0&scrollbar=1" width="100%" height="800px" style="border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);">
+                            <p>Your browser does not support PDFs. <a href="Anderson_Gao.pdf" target="_blank" style="color: #357a8a; text-decoration: none; font-weight: 600;">Download my resume</a> to view it.</p>
+                        </iframe>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <p style="margin-bottom: 1rem; color: #666;">If the resume doesn't display above, you can download it directly:</p>
+                            <a href="Anderson_Gao.pdf" target="_blank" style="background: #357a8a; color: white; padding: 0.8rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-block;">Download Resume</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1153,7 +1040,7 @@
     <section id="contact" class="section contact">
         <div class="container">
             <h2 class="section-title" style="color: white;">Let's Connect</h2>
-            <p>I'm actively seeking <b>Summer 2026 internship/co-op opportunities.</b> Let's discuss how I can contribute to your team!</p>
+            <p>I'm actively seeking <b>Summer & Fall 2026 internship/co-op opportunities.</b> Let's discuss how I can contribute to your team!</p>
             <div class="contact-info">
                 <a href="mailto:agao72@gatech.edu" class="contact-item" target="_blank" rel="noopener">
                     <span>📧</span>
