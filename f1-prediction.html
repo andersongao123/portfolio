@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Formula 1 Prediction Model - Anderson Gao</title>
+    <link rel="icon" type="image/png" href="andersonprofilecropped.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .back-btn {
+            background: #357a8a;
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 22px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #4bb0c8;
+            transform: translateY(-2px);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #357a8a;
+            text-decoration: none;
+        }
+
+        .project-hero {
+            background: linear-gradient(135deg, #4bb0c8, #357a8a);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .project-period {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .project-content {
+            padding: 80px 0;
+        }
+
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #357a8a;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #357a8a;
+            padding-bottom: 0.5rem;
+        }
+
+        .project-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin: 2rem auto;
+            display: block;
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #357a8a;
+        }
+
+        .highlight-card h4 {
+            color: #357a8a;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 2rem 0;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, #4bb0c8, #357a8a);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            background: #357a8a;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: #4bb0c8;
+            transform: translateY(-2px);
+        }
+
+        .code-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-left: 4px solid #357a8a;
+            overflow-x: auto;
+        }
+
+        .code-container h4 {
+            color: #357a8a;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .code-block {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            border: 1px solid #2d3748;
+            position: relative;
+            white-space: pre;
+            tab-size: 4;
+        }
+
+        /* Syntax highlighting for Python */
+        .keyword { color: #ff7979; }
+        .string { color: #00b894; }
+        .comment { color: #74b9ff; font-style: italic; }
+        .function { color: #fdcb6e; }
+        .variable { color: #e17055; }
+        .operator { color: #fd79a8; }
+        .number { color: #00cec9; }
+        .import { color: #ff7979; }
+        .decorator { color: #a29bfe; }
+        .builtin { color: #6c5ce7; }
+
+        .code-header {
+            background: #2d3748;
+            color: #a0aec0;
+            padding: 0.5rem 1rem;
+            border-radius: 10px 10px 0 0;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-bottom: 1px solid #4a5568;
+            margin-bottom: 0;
+        }
+
+        .code-block.with-header {
+            border-radius: 0 0 10px 10px;
+            margin-top: 0;
+        }
+
+        .code-explanation {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 2.2rem;
+            }
+            
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="back-btn">← Back to Portfolio</a>
+            <a href="index.html" class="logo">Anderson Gao</a>
+        </nav>
+    </header>
+
+    <section class="project-hero">
+        <div class="container">
+            <h1 class="project-title">ML Formula 1 Prediction Model</h1>
+            <div class="project-subtitle">Advanced machine learning model for predicting F1 race finishing positions</div>
+            <div class="project-period">June 2025 – July 2025</div>
+        </div>
+    </section>
+
+    <section class="project-content">
+        <div class="container">
+            <!-- Project Overview -->
+            <div class="content-section">
+                <h2 class="section-title">Project Overview</h2>
+                <img src="f1predictorscreenshot.png" alt="F1 Prediction Model Interface" class="project-image">
+                <p class="description-text">
+                    I'm a huge Formula 1 fan (Go McLaren!) and was bored one summer, so I decided to build an ML model to predict race outcomes. This machine learning project predicts race finishing order for every Formula 1 Grand Prix in the 2025 season. By integrating external F1 APIs and implementing advanced regression analysis, the model considers multiple weighted features including track temperature, championship points, and weather conditions to achieve impressive 80% accuracy in predicting race outcomes. The project features an intuitive user interface that allows for prediction visualization and real-time data integration.
+                </p>
+            </div>
+
+            <!-- Key Features/Highlights -->
+            <div class="content-section">
+                <h2 class="section-title">Key Features & Achievements</h2>
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <h4>Prediction Accuracy</h4>
+                        <p>Achieved 80% accuracy in predicting race finishing positions using advanced regression analysis techniques</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Feature Engineering</h4>
+                        <p>Implemented weighted features including track temperature, championship points, and weather conditions for comprehensive prediction</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Intuitive User Interface</h4>
+                        <p>Designed user-friendly UI for prediction customization and result visualization with real-time updates</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Real-Time Integration</h4>
+                        <p>Integrated external F1 APIs for live data feeds and dynamic model updating throughout the racing season</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Details -->
+            <div class="content-section">
+                <h2 class="section-title">Technical Stack</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Machine Learning</span>
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">Regression Analysis</span>
+                    <span class="tech-tag">API Integration</span>
+                    <span class="tech-tag">HTML/CSS/JavaScript</span>
+                </div>
+                <p class="description-text">
+                    The model utilizes advanced regression analysis algorithms to process multiple data streams from official F1 APIs. The system incorporates weighted feature analysis, considering factors such as driver performance history, track characteristics, weather conditions, and current championship standings. The backend processes real-time data feeds, while the frontend provides an interactive interface for users to customize predictions and visualize results through dynamic charts and graphs.
+                </p>
+            </div>
+
+            <!-- Challenges & Solutions -->
+            <div class="content-section">
+                <h2 class="section-title">Challenges & Solutions</h2>
+                <p class="description-text">
+                    One of the main challenges was handling the complexity and variability of Formula 1 race data, where numerous factors can influence race outcomes. I addressed this by implementing a weighted feature system that prioritizes the most impactful variables while still considering secondary factors. Another challenge was ensuring real-time data accuracy and handling API rate limits. I solved this by implementing efficient data caching strategies and fallback mechanisms to maintain prediction reliability even during high-traffic periods or API downtime.
+                </p>
+            </div>
+
+            <!-- Results & Impact -->
+            <div class="content-section">
+                <h2 class="section-title">Results & Impact</h2>
+                <p class="description-text">
+                    It works! The model successfully achieves 80% accuracy in predicting race finishing positions, demonstrating the effectiveness of the machine learning approach applied to motorsport analytics. The intuitive user interface makes complex predictions accessible to both casual fans and serious analysts. This project showcases the application of data science in sports analytics and demonstrates proficiency in handling real-time data integration, user interface design, and predictive modeling. The system has potential applications in sports betting analysis, team strategy planning, and fan engagement platforms. I am currently working on pushing the front end and back end to a website, where users can make their own predictions.
+                </p>
+            </div>
+
+            <!-- Core API Implementation -->
+            <div class="content-section">
+                <h2 class="section-title">Core API Implementation</h2>
+                <p class="description-text">
+                    The heart of the F1 prediction system is a Flask-based API that integrates real-time Formula 1 data from multiple sources. Below is the main API endpoint that fetches driver data, championship standings, and race conditions:
+                </p>
+
+                <div class="code-container">
+                    <div class="code-header">📄 f1_api.py - Driver Data API Endpoint</div>
+                    <div class="code-block with-header"><span class="keyword">from</span> <span class="variable">flask</span> <span class="keyword">import</span> <span class="variable">Flask</span>, <span class="variable">jsonify</span>
+<span class="keyword">import</span> <span class="variable">fastf1</span>
+<span class="keyword">from</span> <span class="variable">fastf1.ergast</span> <span class="keyword">import</span> <span class="variable">Ergast</span>
+<span class="keyword">from</span> <span class="variable">datetime</span> <span class="keyword">import</span> <span class="variable">datetime</span>
+<span class="keyword">from</span> <span class="variable">flask_cors</span> <span class="keyword">import</span> <span class="variable">CORS</span>
+
+<span class="variable">app</span> <span class="operator">=</span> <span class="function">Flask</span>(<span class="builtin">__name__</span>)
+<span class="function">CORS</span>(<span class="variable">app</span>)
+
+<span class="comment"># Expanded team color mapping to cover more name variants</span>
+<span class="variable">TEAM_COLORS</span> <span class="operator">=</span> {
+    <span class="string">"Mercedes"</span>: <span class="string">"#00d2be"</span>,
+    <span class="string">"Red Bull Racing Honda RBPT"</span>: <span class="string">"#0600ef"</span>,
+    <span class="string">"Red Bull"</span>: <span class="string">"#0600ef"</span>,
+    <span class="string">"Ferrari"</span>: <span class="string">"#dc143c"</span>,
+    <span class="string">"McLaren Mercedes"</span>: <span class="string">"#ff8700"</span>,
+    <span class="string">"McLaren"</span>: <span class="string">"#ff8700"</span>,
+    <span class="string">"Aston Martin Aramco Mercedes"</span>: <span class="string">"#006f62"</span>,
+    <span class="string">"Aston Martin"</span>: <span class="string">"#006f62"</span>,
+    <span class="string">"Alpine Renault"</span>: <span class="string">"#0090ff"</span>,
+    <span class="string">"Alpine"</span>: <span class="string">"#0090ff"</span>,
+    <span class="string">"Williams Mercedes"</span>: <span class="string">"#005aff"</span>,
+    <span class="string">"Williams"</span>: <span class="string">"#005aff"</span>,
+    <span class="string">"Racing Bulls Honda RBPT"</span>: <span class="string">"#2b4562"</span>,
+    <span class="string">"Racing Bulls"</span>: <span class="string">"#2b4562"</span>,
+    <span class="string">"Kick Sauber Ferrari"</span>: <span class="string">"#52c41a"</span>,
+    <span class="string">"Kick Sauber"</span>: <span class="string">"#52c41a"</span>,
+    <span class="string">"Haas Ferrari"</span>: <span class="string">"#b6babd"</span>,
+    <span class="string">"Haas F1 Team"</span>: <span class="string">"#b6babd"</span>,
+    <span class="string">"Haas"</span>: <span class="string">"#b6babd"</span>,
+}
+
+<span class="decorator">@app.route</span>(<span class="string">'/api/drivers/&lt;int:year&gt;'</span>)
+<span class="keyword">def</span> <span class="function">get_drivers</span>(<span class="variable">year</span>):
+    <span class="variable">schedule</span> <span class="operator">=</span> <span class="variable">fastf1</span>.<span class="function">get_event_schedule</span>(<span class="variable">year</span>)
+    <span class="variable">now</span> <span class="operator">=</span> <span class="variable">datetime</span>.<span class="function">now</span>().<span class="function">replace</span>(<span class="variable">tzinfo</span><span class="operator">=</span><span class="keyword">None</span>)
+    <span class="variable">past_races</span> <span class="operator">=</span> <span class="variable">schedule</span>[<span class="variable">schedule</span>[<span class="string">'EventDate'</span>] <span class="operator">&lt;</span> <span class="variable">now</span>]
+    <span class="variable">session</span> <span class="operator">=</span> <span class="keyword">None</span>
+
+    <span class="comment"># Try each past race, starting from the most recent, until one loads successfully</span>
+    <span class="keyword">for</span> <span class="variable">_</span>, <span class="variable">race</span> <span class="keyword">in</span> <span class="variable">past_races</span>[::<span class="operator">-</span><span class="number">1</span>].<span class="function">iterrows</span>():
+        <span class="keyword">try</span>:
+            <span class="variable">session</span> <span class="operator">=</span> <span class="variable">fastf1</span>.<span class="function">get_session</span>(<span class="variable">year</span>, <span class="variable">race</span>[<span class="string">'EventName'</span>], <span class="string">'R'</span>)
+            <span class="variable">session</span>.<span class="function">load</span>()
+            <span class="keyword">if</span> <span class="variable">session</span>.<span class="variable">drivers</span>:  <span class="comment"># Only break if drivers are found</span>
+                <span class="keyword">break</span>
+        <span class="keyword">except</span> <span class="builtin">Exception</span> <span class="keyword">as</span> <span class="variable">e</span>:
+            <span class="keyword">continue</span>
+
+    <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable">session</span> <span class="keyword">or</span> <span class="keyword">not</span> <span class="variable">session</span>.<span class="variable">drivers</span>:
+        <span class="function">print</span>(<span class="string">"No race sessions with driver data found for this year."</span>)
+        <span class="keyword">return</span> <span class="function">jsonify</span>([])
+
+    <span class="comment"># Get championship standings using Ergast</span>
+    <span class="variable">ergast</span> <span class="operator">=</span> <span class="function">Ergast</span>()
+    <span class="variable">standings</span> <span class="operator">=</span> <span class="variable">ergast</span>.<span class="function">get_driver_standings</span>(<span class="variable">season</span><span class="operator">=</span><span class="variable">year</span>)
+    <span class="variable">standings_df</span> <span class="operator">=</span> <span class="variable">standings</span>.<span class="variable">content</span>[<span class="number">0</span>]  <span class="comment"># DataFrame</span>
+
+    <span class="variable">drivers</span> <span class="operator">=</span> []
+    <span class="keyword">for</span> <span class="variable">drv</span> <span class="keyword">in</span> <span class="variable">session</span>.<span class="variable">drivers</span>:
+        <span class="variable">info</span> <span class="operator">=</span> <span class="variable">session</span>.<span class="function">get_driver</span>(<span class="variable">drv</span>)
+        <span class="variable">points</span> <span class="operator">=</span> <span class="keyword">None</span>
+        <span class="variable">surname</span> <span class="operator">=</span> <span class="variable">info</span>[<span class="string">'LastName'</span>].<span class="function">lower</span>()
+        <span class="variable">fullname</span> <span class="operator">=</span> (<span class="variable">info</span>[<span class="string">'FirstName'</span>] <span class="operator">+</span> <span class="variable">info</span>[<span class="string">'LastName'</span>]).<span class="function">replace</span>(<span class="string">" "</span>, <span class="string">""</span>).<span class="function">lower</span>()
+        
+        <span class="comment"># Try surname match</span>
+        <span class="variable">match</span> <span class="operator">=</span> <span class="variable">standings_df</span>[<span class="variable">standings_df</span>[<span class="string">'driverId'</span>] <span class="operator">==</span> <span class="variable">surname</span>]
+        <span class="comment"># If not found, try if surname is in driverId (for cases like max_verstappen)</span>
+        <span class="keyword">if</span> <span class="variable">match</span>.<span class="function">empty</span>:
+            <span class="variable">match</span> <span class="operator">=</span> <span class="variable">standings_df</span>[<span class="variable">standings_df</span>[<span class="string">'driverId'</span>].<span class="variable">str</span>.<span class="function">contains</span>(<span class="variable">surname</span>)]
+        <span class="comment"># If still not found, try full name (for rare cases)</span>
+        <span class="keyword">if</span> <span class="variable">match</span>.<span class="function">empty</span>:
+            <span class="variable">match</span> <span class="operator">=</span> <span class="variable">standings_df</span>[<span class="variable">standings_df</span>[<span class="string">'driverId'</span>].<span class="variable">str</span>.<span class="function">replace</span>(<span class="string">'_'</span>, <span class="string">''</span>).<span class="variable">str</span>.<span class="function">contains</span>(<span class="variable">fullname</span>)]
+        <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable">match</span>.<span class="function">empty</span>:
+            <span class="variable">points</span> <span class="operator">=</span> <span class="variable">match</span>.<span class="function">iloc</span>[<span class="number">0</span>][<span class="string">'points'</span>]
+            
+        <span class="variable">team_name</span> <span class="operator">=</span> <span class="variable">info</span>[<span class="string">'TeamName'</span>]
+        <span class="comment"># Force Red Bull color for specific drivers regardless of team name variant</span>
+        <span class="keyword">if</span> <span class="variable">info</span>[<span class="string">'LastName'</span>].<span class="function">lower</span>() <span class="keyword">in</span> [<span class="string">'verstappen'</span>, <span class="string">'tsunoda'</span>]:
+            <span class="variable">color</span> <span class="operator">=</span> <span class="string">"#0600ef"</span>
+        <span class="keyword">else</span>:
+            <span class="variable">color</span> <span class="operator">=</span> <span class="variable">TEAM_COLORS</span>.<span class="function">get</span>(<span class="variable">team_name</span>, <span class="variable">TEAM_COLORS</span>.<span class="function">get</span>(<span class="variable">team_name</span>.<span class="function">split</span>()[<span class="number">0</span>], <span class="string">"#ffffff"</span>))
+            
+        <span class="variable">drivers</span>.<span class="function">append</span>({
+            <span class="string">'name'</span>: <span class="variable">info</span>[<span class="string">'FullName'</span>],
+            <span class="string">'team'</span>: <span class="variable">team_name</span>,
+            <span class="string">'number'</span>: <span class="variable">info</span>[<span class="string">'DriverNumber'</span>],
+            <span class="string">'abbreviation'</span>: <span class="variable">info</span>[<span class="string">'Abbreviation'</span>],
+            <span class="string">'championshipPoints'</span>: <span class="variable">points</span>,
+            <span class="string">'color'</span>: <span class="variable">color</span>,
+        })
+
+    <span class="keyword">return</span> <span class="function">jsonify</span>({<span class="string">"drivers"</span>: <span class="variable">drivers</span>})
+
+<span class="keyword">if</span> <span class="builtin">__name__</span> <span class="operator">==</span> <span class="string">'__main__'</span>:
+    <span class="variable">app</span>.<span class="function">run</span>(<span class="variable">debug</span><span class="operator">=</span><span class="keyword">True</span>)</div>
+                    <div class="code-explanation">
+                        <strong>Code Explanation:</strong><br><br>
+                        This Flask API endpoint demonstrates several key technical concepts:
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li><strong>Data Integration:</strong> Combines FastF1 library for real-time race data with Ergast API for championship standings</li>
+                            <li><strong>Error Handling:</strong> Iterates through past races to find valid session data, ensuring the API remains functional even if recent race data is unavailable</li>
+                            <li><strong>Intelligent Data Matching:</strong> Implements fuzzy matching algorithms to correlate driver names between different data sources, handling variations in naming conventions</li>
+                            <li><strong>Team Visualization:</strong> Maps team names to official F1 colors for consistent UI presentation, with fallback handling for name variations</li>
+                            <li><strong>RESTful Design:</strong> Clean API structure that accepts year parameters and returns structured JSON data for frontend consumption</li>
+                        </ul>
+                        <br>
+                        The code showcases my proficiency in Python, web development, data processing, API design, and handling real-world data inconsistencies that are common in sports analytics applications.
+                    </div>
+                </div>
+
+                <div class="code-container">
+                    <h4>Key Technical Features</h4>
+                    <div class="code-explanation">
+                        <strong>Data Processing Pipeline:</strong><br>
+                        • <strong>Real-time Data Fetching:</strong> Uses FastF1 to access live Formula 1 telemetry and session data<br>
+                        • <strong>Integration with F1 Rankings:</strong> Merges current season standings from Ergast API<br>
+                        • <strong>Error Handling:</strong> Gracefully handles API failures and missing data<br>
+                        • <strong>Name Matching:</strong> Resolves driver name inconsistencies between data sources<br><br>
+                        
+                        <strong>Machine Learning Features:</strong><br>
+                        • <strong>Feature Engineering:</strong> Extracts championship points, team performance, and qualifying times<br>
+                        • <strong>Data Normalization:</strong> Standardizes data formats for ML model consumption<br>
+                        • <strong>Integration:</strong> Provides team colors and driver information for UI rendering<br>
+                        • <strong>Scalable Software:</strong> Modular design allows easy extension for additional features down the road
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Anderson Gao. <a href="index.html" style="color: #4bb0c8;">Back to Portfolio</a></p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raspberry Pi System Monitor - Anderson Gao</title>
+    <link rel="icon" type="image/png" href="andersonprofilecropped.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .back-btn {
+            background: #357a8a;
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 22px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #4bb0c8;
+            transform: translateY(-2px);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #357a8a;
+            text-decoration: none;
+        }
+
+        .project-hero {
+            background: linear-gradient(135deg, #4bb0c8, #357a8a);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .project-period {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .project-content {
+            padding: 80px 0;
+        }
+
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #357a8a;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #357a8a;
+            padding-bottom: 0.5rem;
+        }
+
+        .project-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin: 2rem auto;
+            display: block;
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #357a8a;
+        }
+
+        .highlight-card h4 {
+            color: #357a8a;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 2rem 0;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, #4bb0c8, #357a8a);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            background: #357a8a;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: #4bb0c8;
+            transform: translateY(-2px);
+        }
+
+        .code-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-left: 4px solid #357a8a;
+            overflow-x: auto;
+        }
+
+        .code-container h4 {
+            color: #357a8a;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .code-block {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            border: 1px solid #2d3748;
+            position: relative;
+            white-space: pre;
+            tab-size: 4;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 2.2rem;
+            }
+            
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="back-btn">← Back to Portfolio</a>
+            <a href="index.html" class="logo">Anderson Gao</a>
+        </nav>
+    </header>
+
+    <section class="project-hero">
+        <div class="container">
+            <h1 class="project-title">Raspberry Pi System Monitor</h1>
+            <div class="project-subtitle">Real-time dashboard for monitoring Raspberry Pi system metrics</div>
+            <div class="project-period">November 2025</div>
+        </div>
+    </section>
+
+    <section class="project-content">
+        <div class="container">
+            <!-- Project Overview -->
+            <div class="content-section">
+                <h2 class="section-title">Project Overview</h2>
+                <p class="description-text">
+                    For my discovery project, I decided to build a comprehensive system monitoring dashboard using my Raspberry Pi 5. This ambitious undertaking required learning multiple new technologies and overcoming significant networking challenges. The project provides real-time system health monitoring including CPU load, memory usage, and temperature tracking through an intuitive web-based interface hosted locally on the Raspberry Pi. This hands-on experience taught me essential skills in Linux system administration, network configuration, web development with Next.js, and embedded systems deployment.
+                </p>
+                
+                <div class="development-setup" style="text-align: center; margin: 2.5rem 0;">
+                    <img src="raspberrypi-setup.png" alt="Development setup showing Raspberry Pi programming environment" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <p style="font-style: italic; color: #666; margin-top: 1rem;">Development setup showing command line programming environment with Raspberry Pi 5</p>
+                </div>
+            </div>
+
+            <!-- Key Features/Highlights -->
+            <div class="content-section">
+                <h2 class="section-title">Key Features & Achievements</h2>
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <h4>System Monitoring</h4>
+                        <p>Continuously tracks CPU load, memory usage, system temperatures, and refreshes every 2 seconds</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Web Dashboard</h4>
+                        <p>Built with Next.js and TypeScript for server-side rendered performance monitoring interface</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Responsive Design</h4>
+                        <p>UI components using modern CSS and component libraries for viewing across all devices</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>System Analytics</h4>
+                        <p>Provides historical data trends and performance insights to optimize Raspberry Pi deployment and prevent issues</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Details -->
+            <div class="content-section">
+                <h2 class="section-title">Technologies Learned & Skills Developed</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">Next.js</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Linux</span>
+                    <span class="tech-tag">SSH</span>
+                    <span class="tech-tag">Bash</span>
+                    <span class="tech-tag">Git</span>
+                    <span class="tech-tag">Raspberry Pi 5</span>
+                    <span class="tech-tag">Local Web Hosting</span>
+                </div>
+                <p class="description-text">
+                    This discovery project required mastering numerous technologies from scratch. Key learning areas included: SSH configuration and remote access to the Raspberry Pi, Linux system administration for network setup and service management, bash scripting for automated system monitoring, Next.js framework for building the web dashboard, IP address management and network troubleshooting, Git version control for project management, and local web hosting on embedded systems. The project provided hands-on experience with the complete development stack from hardware configuration to web application deployment.
+                </p>
+
+            <!-- System Architecture -->
+            <div class="content-section">
+                <h2 class="section-title">System Architecture & Implementation</h2>
+                <p class="description-text">
+                    The monitoring system follows a client-server architecture where the Next.js application runs on the Raspberry Pi itself, reading system metrics directly from the Linux kernel interfaces. Key implementation details include:
+                </p>
+                
+                <div class="code-container">
+                    <h4>Core Monitoring Features</h4>
+                    <div class="description-text">
+                        <strong>CPU Load Monitoring:</strong><br>
+                        • Real-time CPU utilization tracking across all cores<br>
+                        • Load average calculations (1-min, 5-min, 15-min)<br>
+                        • Process-level CPU usage analysis<br>
+                        • Historical CPU usage trends and graphs<br><br>
+                        
+                        <strong>Memory Usage Analysis:</strong><br>
+                        • RAM usage monitoring with available/used breakdowns<br>
+                        • Virtual memory and swap usage tracking<br>
+                        • Memory allocation per process identification<br>
+                        • Low memory threshold alerts and notifications<br><br>
+                        
+                        <strong>Temperature Management:</strong><br>
+                        • CPU temperature monitoring with thermal alerts<br>
+                        • GPU temperature tracking for overclocking scenarios<br>
+                        • Historical temperature data for thermal analysis<br>
+                        • Critical temperature warning system implementation
+                    </div>
+                </div>
+            </div>
+
+            <!-- Development Challenges -->
+            <div class="content-section">
+                <h2 class="section-title">Development Challenges & Problem-Solving</h2>
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <h4>Network Connectivity Issues</h4>
+                        <p>I was unable to connect Raspberry Pi to WiFi due to GTother network firewall restrictions. Solved by configuring ethernet connection and understanding network security protocols.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>SSH Access Troubleshooting</h4>
+                        <p>I failed to establish SSH connection due to incorrect IP address configuration. Resolved through systematic network diagnostics and DHCP lease table analysis.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Hardware Cooling System</h4>
+                        <p>Raspberry Pi cooling fan appeared non-functional initially. Discovered the fan only activates after reaching specific CPU temperature thresholds.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Resource Optimization</h4>
+                        <p>Implemented efficient data polling mechanisms to prevent overwhelming the Pi's limited resources while maintaining real-time monitoring capabilities.</p>
+                    </div>
+                </div>
+                <p class="description-text">
+                    This project presented numerous real-world challenges that required systematic problem-solving and research. The network configuration issues taught me about enterprise firewall restrictions and alternative connectivity solutions. SSH troubleshooting deepened my understanding of IP addressing and network diagnostics. Hardware integration challenges provided insights into thermal management and embedded system behavior. These obstacles transformed into valuable learning experiences that enhanced my technical problem-solving abilities and system administration skills.
+                </p>
+            </div>
+
+            <!-- Results & Impact -->
+            <div class="content-section">
+                <h2 class="section-title">Results & Future Enhancements</h2>
+                <div class="dashboard-showcase" style="text-align: center; margin: 2rem 0;">
+                    <img src="raspberry-pi_image.png" alt="Raspberry Pi System Monitor Dashboard" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <p style="font-style: italic; color: #666; margin-top: 1rem;">Interactive system dashboard showing real-time monitoring capabilities</p>
+                </div>
+                
+                <div class="video-showcase" style="text-align: center; margin: 2.5rem 0;">
+                    <iframe src="https://drive.google.com/file/d/1TyRoeFuqwUVE30NXD492Ujstn8rt_akM/preview" width="640" height="480" allow="autoplay" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"></iframe>
+                    <p style="font-style: italic; color: #666; margin-top: 1rem;">Live demonstration: CPU monitoring during stress test by opening multiple browser tabs</p>
+                </div>
+                
+                <p class="description-text">
+                    The monitoring dashboard successfully provides comprehensive real-time visibility into Raspberry Pi system performance through local web hosting. This discovery project dramatically expanded my technical skillset, providing hands-on experience with Linux system administration, network configuration, modern web development, and embedded systems programming. The project demonstrates proficiency in full-stack development from hardware setup to web application deployment.
+                </p>
+                
+                <div class="code-container">
+                    <h4>Future Enhancement Roadmap</h4>
+                    <div class="description-text">
+                        <strong>Public Hosting & Accessibility:</strong><br>
+                        • Configure Raspberry Pi for continuous operation with public internet access<br>
+                        • Implement secure remote access with proper authentication and SSL certificates<br>
+                        • Set up dynamic DNS for consistent external connectivity<br>
+                        • Develop mobile-responsive interface for remote monitoring<br><br>
+                        
+                        <strong>Interactive System Control:</strong><br>
+                        • Add web-based system administration controls for remote Pi management<br>
+                        • Implement user authentication and role-based access control<br>
+                        • Create interactive controls for system services and process management<br>
+                        • Develop real-time terminal access through web interface<br><br>
+                        
+                        <strong>Advanced Monitoring Features:</strong><br>
+                        • Network traffic monitoring and bandwidth analysis<br>
+                        • Disk I/O tracking and storage management tools<br>
+                        • Multi-device monitoring for Raspberry Pi clusters<br>
+                        • Historical data analytics and performance trend analysis
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Links -->
+            <div class="content-section">
+                <h2 class="section-title">Project Repository</h2>
+                <div class="project-links">
+                    <a href="https://github.com/andersongao123/raspberrypi-monitor" target="_blank" class="project-link">GitHub Repository</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Anderson Gao. <a href="index.html" style="color: #4bb0c8;">Back to Portfolio</a></p>
+        </div>
+    </footer>
+</body>
+</html>
